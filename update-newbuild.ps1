@@ -60,5 +60,5 @@ invoke-command -session $session -scriptblock {
 }
 # Create install_files folder on c: drive
 Invoke-command -session $session -ScriptBlock {
-    if (test-path -path c:\ ){new-item -name "install_files" -Path "c:\" -ItemType Directory
+    if (test-path -path c:\ ){new-item -name "install_files" -Path "c:\" -ItemType Directory}
 }

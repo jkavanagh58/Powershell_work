@@ -1,0 +1,1 @@
+﻿gwmi win32_tsissuedlicense -computername clvprdrdsls01.cgicleve.com | out-gridview

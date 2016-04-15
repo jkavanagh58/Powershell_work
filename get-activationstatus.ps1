@@ -13,8 +13,15 @@
             $status = New-Object ComponentModel.Win32Exception ($_.Exception.ErrorCode)
             $wpa = $null    
         }
+        try {
+            $ipval = [System.Net.DNS]::GetHostByName($DNSHostName).AddressList.IPAddressToString
+        }
+        catch {
+            $ipval = "No entry found"
+        }
         $out = New-Object psobject -Property @{
             ComputerName = $DNSHostName;
+            IPAddress = $ipval
             Status = [string]::Empty;
         }
         if ($wpa) {
@@ -31,7 +38,7 @@
                 }
             }
         } else {$out.Status = $status.Message}
-        $out
+        $out | Select ComputerName, IPAddress, Status
     }
 }
 $machines = "satprdcons002","CLVPTESQLN001","CLVPTESQLN002","clvtstwebvs002","clepterstapp001","clepterstapp002","CLEPERONB001",
